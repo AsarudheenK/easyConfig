@@ -24,7 +24,6 @@ public class EmployeeTest {
 	}
 	
 	public Employee(String firstName, String lastName, String emailId) {
-		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailId = emailId;
