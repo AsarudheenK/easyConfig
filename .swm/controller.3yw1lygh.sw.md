@@ -142,49 +142,6 @@ The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/
 
 </SwmSnippet>
 
-## Update an employee
-
-<SwmSnippet path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" line="51">
-
----
-
-The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="54:8:8" line-data="	public ResponseEntity&lt;Employee&gt; updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails){">`updateEmployee`</SwmToken> method handles PUT requests to update an existing employee's details. It first retrieves the employee by ID, updates the fields, and saves the changes.
-
-```
-	// update employee rest api
-
-	
-
-	@PutMapping("/employees/{id}")
-
-	public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails){
-
-		Employee employee = employeeRepository.findById(id)
-
-				.orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + id));
-
-		
-
-		employee.setFirstName(employeeDetails.getFirstName());
-
-		employee.setLastName(employeeDetails.getLastName());
-
-		employee.setEmailId(employeeDetails.getEmailId());
-
-		
-
-		Employee updatedEmployee = employeeRepository.save(employee);
-
-		return ResponseEntity.ok(updatedEmployee);
-
-	}
-
-```
-
----
-
-</SwmSnippet>
-
 ## Delete an employee
 
 <SwmSnippet path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" line="66">

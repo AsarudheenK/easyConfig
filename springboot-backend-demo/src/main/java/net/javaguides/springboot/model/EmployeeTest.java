@@ -19,12 +19,11 @@ public class EmployeeTest {
 	@Column(name = "email_id")
 	private String emailId;
 	
-	public Employee() {
+	public void Employee() {
 		
 	}
 	
-	public Employee(String firstName, String lastName, String emailId) {
-		super();
+	public void Employee(String firstName, String lastName, String emailId) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailId = emailId;
