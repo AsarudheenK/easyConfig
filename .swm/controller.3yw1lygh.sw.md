@@ -1,14 +1,6 @@
 ---
 title: Controller
 ---
-# 
-
-<p align="center"><img src="/.swm/images/image-2025-2-4-9-8-52-217.png"></p>
-
-```java
-com.bosch.ec
-```
-
 # Introduction
 
 This document will walk you through the implementation of the <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken> in a Spring Boot application. The <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken> is responsible for handling HTTP requests related to employee data management.
@@ -26,73 +18,6 @@ We will cover:
 # Code flow
 
 ## Controller setup
-
-<SwmSnippet path="springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" line="21">
-
----
-
-&nbsp;
-
-```
-import com.bosch.ec.model.Employee;
-```
-
----
-
-</SwmSnippet>
-
-<SwmSnippet path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" line="1">
-
----
-
-&nbsp;
-
-```java
-package com.bosch.ec.controller;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.bosch.ec.repository.EmployeeRepository;
-import com.bosch.ec.exception.ResourceNotFoundException;
-import com.bosch.ec.model.Employee;
-
-@CrossOrigin(origins = "http://localhost:4200")
-@RestController
-@RequestMapping("/api/v1/")
-public class EmployeeController {
-```
-
----
-
-</SwmSnippet>
-
-<SwmSnippet path="springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" line="21">
-
----
-
-The <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken> is annotated with <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="24:0:1" line-data="@RestController">`@RestController`</SwmToken> and <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="25:0:1" line-data="@RequestMapping(&quot;/api/v1/&quot;)">`@RequestMapping`</SwmToken> to define it as a RESTful web service controller. The <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="23:0:1" line-data="@CrossOrigin(origins = &quot;http://localhost:4200&quot;)">`@CrossOrigin`</SwmToken> annotation allows cross-origin requests from the specified URL.
-
-```
-import com.bosch.ec.model.Employee;
-```
-
----
-
-</SwmSnippet>
 
 ## Dependency injection
 
@@ -228,7 +153,7 @@ The <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/Em
 
 - <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken>: The main class handling HTTP requests.
   - **Attributes**:
-    - <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="29:5:5" line-data="	private EmployeeRepository employeeRepository;">`employeeRepository`</SwmToken>: An instance of <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="21:10:10" line-data="import net.javaguides.springboot.repository.EmployeeRepository;">`EmployeeRepository`</SwmToken> for database operations.
+    - <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="29:5:5" line-data="	private EmployeeRepository employeeRepository;">`employeeRepository`</SwmToken>: An instance of <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="19:10:10" line-data="import com.bosch.ec.repository.EmployeeRepository;">`EmployeeRepository`</SwmToken> for database operations.
   - **Methods**:
     - <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="33:8:10" line-data="	public List&lt;Employee&gt; getAllEmployees(){">`getAllEmployees()`</SwmToken>: Retrieves all employees.
     - <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="39:5:5" line-data="	public Employee createEmployee(@RequestBody Employee employee) {">`createEmployee`</SwmToken>`(`\`Employee` `<SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="37:5:5" line-data="	// create employee rest api">`employee`</SwmToken>`)`: Creates a new employee.
