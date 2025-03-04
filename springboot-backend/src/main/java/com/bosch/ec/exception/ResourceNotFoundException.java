@@ -1,4 +1,4 @@
-package net.javaguides.springboot.exception;
+package com.bosch.ec.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

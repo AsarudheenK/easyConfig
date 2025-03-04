@@ -1,4 +1,4 @@
-package net.javaguides.springboot.model;
+package com.bosch.ec.model;
 
 import jakarta.persistence.*;
 
