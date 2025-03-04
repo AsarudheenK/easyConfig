@@ -1,9 +1,17 @@
 ---
 title: Controller
 ---
+# 
+
+<p align="center"><img src="/.swm/images/image-2025-2-4-9-8-52-217.png"></p>
+
+```java
+com.bosch.ec
+```
+
 # Introduction
 
-This document will walk you through the implementation of the <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken> in a Spring Boot application. The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken> is responsible for handling HTTP requests related to employee data management.
+This document will walk you through the implementation of the <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken> in a Spring Boot application. The <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken> is responsible for handling HTTP requests related to employee data management.
 
 /
 
@@ -11,24 +19,56 @@ This document will walk you through the implementation of the <SwmToken path="/s
 
 We will cover:
 
-1. Why the <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken> is structured to handle CRUD operations.
+1. Why the <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken> is structured to handle CRUD operations.
 2. How the code flow is organized to manage employee data.
-3. The class diagram representation of the <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken>.
+3. The class diagram representation of the <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken>.
 
 # Code flow
 
 ## Controller setup
 
-<SwmSnippet path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" line="19">
+<SwmSnippet path="springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" line="21">
 
 ---
 
-The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken> is annotated with <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="24:0:1" line-data="@RestController">`@RestController`</SwmToken> and <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="25:0:1" line-data="@RequestMapping(&quot;/api/v1/&quot;)">`@RequestMapping`</SwmToken> to define it as a RESTful web service controller. The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="23:0:1" line-data="@CrossOrigin(origins = &quot;http://localhost:4200&quot;)">`@CrossOrigin`</SwmToken> annotation allows cross-origin requests from the specified URL.
+&nbsp;
 
 ```
-import net.javaguides.springboot.exception.ResourceNotFoundException;
-import net.javaguides.springboot.model.Employee;
-import net.javaguides.springboot.repository.EmployeeRepository;
+import com.bosch.ec.model.Employee;
+```
+
+---
+
+</SwmSnippet>
+
+<SwmSnippet path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" line="1">
+
+---
+
+&nbsp;
+
+```java
+package com.bosch.ec.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.bosch.ec.repository.EmployeeRepository;
+import com.bosch.ec.exception.ResourceNotFoundException;
+import com.bosch.ec.model.Employee;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -40,13 +80,27 @@ public class EmployeeController {
 
 </SwmSnippet>
 
-## Dependency injection
-
-<SwmSnippet path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" line="28">
+<SwmSnippet path="springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" line="21">
 
 ---
 
-The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="29:3:3" line-data="	private EmployeeRepository employeeRepository;">`EmployeeRepository`</SwmToken> is injected into the controller using <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="28:1:2" line-data="	@Autowired">`@Autowired`</SwmToken>. This allows the controller to interact with the database through the repository.
+The <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken> is annotated with <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="24:0:1" line-data="@RestController">`@RestController`</SwmToken> and <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="25:0:1" line-data="@RequestMapping(&quot;/api/v1/&quot;)">`@RequestMapping`</SwmToken> to define it as a RESTful web service controller. The <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="23:0:1" line-data="@CrossOrigin(origins = &quot;http://localhost:4200&quot;)">`@CrossOrigin`</SwmToken> annotation allows cross-origin requests from the specified URL.
+
+```
+import com.bosch.ec.model.Employee;
+```
+
+---
+
+</SwmSnippet>
+
+## Dependency injection
+
+<SwmSnippet path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" line="28">
+
+---
+
+The <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="29:3:3" line-data="	private EmployeeRepository employeeRepository;">`EmployeeRepository`</SwmToken> is injected into the controller using <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="28:1:2" line-data="	@Autowired">`@Autowired`</SwmToken>. This allows the controller to interact with the database through the repository.
 
 ```
 	@Autowired
@@ -65,11 +119,11 @@ The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/
 
 ## Retrieve all employees
 
-<SwmSnippet path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" line="28">
+<SwmSnippet path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" line="28">
 
 ---
 
-The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="33:8:8" line-data="	public List&lt;Employee&gt; getAllEmployees(){">`getAllEmployees`</SwmToken> method handles GET requests to retrieve all employee records from the database. It uses the <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="29:5:5" line-data="	private EmployeeRepository employeeRepository;">`employeeRepository`</SwmToken> to fetch the data.
+The <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="33:8:8" line-data="	public List&lt;Employee&gt; getAllEmployees(){">`getAllEmployees`</SwmToken> method handles GET requests to retrieve all employee records from the database. It uses the <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="29:5:5" line-data="	private EmployeeRepository employeeRepository;">`employeeRepository`</SwmToken> to fetch the data.
 
 ```
 	@Autowired
@@ -88,11 +142,11 @@ The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/
 
 ## Create a new employee
 
-<SwmSnippet path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" line="37">
+<SwmSnippet path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" line="37">
 
 ---
 
-The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="39:5:5" line-data="	public Employee createEmployee(@RequestBody Employee employee) {">`createEmployee`</SwmToken> method handles POST requests to add a new employee. It saves the employee data received in the request body to the database.
+The <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="39:5:5" line-data="	public Employee createEmployee(@RequestBody Employee employee) {">`createEmployee`</SwmToken> method handles POST requests to add a new employee. It saves the employee data received in the request body to the database.
 
 ```
 	// create employee rest api
@@ -116,11 +170,11 @@ The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/
 
 ## Retrieve an employee by ID
 
-<SwmSnippet path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" line="37">
+<SwmSnippet path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" line="37">
 
 ---
 
-The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="45:8:8" line-data="	public ResponseEntity&lt;Employee&gt; getEmployeeById(@PathVariable Long id) {">`getEmployeeById`</SwmToken> method handles GET requests to fetch a specific employee by their ID. It throws a <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="47:11:11" line-data="				.orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Employee not exist with id :&quot; + id));">`ResourceNotFoundException`</SwmToken> if the employee does not exist.
+The <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="45:8:8" line-data="	public ResponseEntity&lt;Employee&gt; getEmployeeById(@PathVariable Long id) {">`getEmployeeById`</SwmToken> method handles GET requests to fetch a specific employee by their ID. It throws a <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="47:11:11" line-data="				.orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Employee not exist with id :&quot; + id));">`ResourceNotFoundException`</SwmToken> if the employee does not exist.
 
 ```
 	// create employee rest api
@@ -144,11 +198,11 @@ The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/
 
 ## Delete an employee
 
-<SwmSnippet path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" line="66">
+<SwmSnippet path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" line="66">
 
 ---
 
-The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="68:13:13" line-data="	public ResponseEntity&lt;Map&lt;String, Boolean&gt;&gt; deleteEmployee(@PathVariable Long id){">`deleteEmployee`</SwmToken> method handles DELETE requests to remove an employee from the database. It confirms the deletion by returning a response map.
+The <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="68:13:13" line-data="	public ResponseEntity&lt;Map&lt;String, Boolean&gt;&gt; deleteEmployee(@PathVariable Long id){">`deleteEmployee`</SwmToken> method handles DELETE requests to remove an employee from the database. It confirms the deletion by returning a response map.
 
 ```
 	// delete employee rest api
@@ -170,18 +224,18 @@ The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/
 
 # Class diagram
 
-The <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken> class diagram would include the following components:
+The <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken> class diagram would include the following components:
 
-- <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken>: The main class handling HTTP requests.
+- <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken>: The main class handling HTTP requests.
   - **Attributes**:
-    - <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="29:5:5" line-data="	private EmployeeRepository employeeRepository;">`employeeRepository`</SwmToken>: An instance of <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="21:10:10" line-data="import net.javaguides.springboot.repository.EmployeeRepository;">`EmployeeRepository`</SwmToken> for database operations.
+    - <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="29:5:5" line-data="	private EmployeeRepository employeeRepository;">`employeeRepository`</SwmToken>: An instance of <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="21:10:10" line-data="import net.javaguides.springboot.repository.EmployeeRepository;">`EmployeeRepository`</SwmToken> for database operations.
   - **Methods**:
-    - <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="33:8:10" line-data="	public List&lt;Employee&gt; getAllEmployees(){">`getAllEmployees()`</SwmToken>: Retrieves all employees.
-    - <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="39:5:5" line-data="	public Employee createEmployee(@RequestBody Employee employee) {">`createEmployee`</SwmToken>`(`<SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="20:10:10" line-data="import net.javaguides.springboot.model.Employee;">`Employee`</SwmToken>` `<SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="37:5:5" line-data="	// create employee rest api">`employee`</SwmToken>`)`: Creates a new employee.
-    - <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="45:8:8" line-data="	public ResponseEntity&lt;Employee&gt; getEmployeeById(@PathVariable Long id) {">`getEmployeeById`</SwmToken>`(`<SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="45:13:13" line-data="	public ResponseEntity&lt;Employee&gt; getEmployeeById(@PathVariable Long id) {">`Long`</SwmToken>` `<SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="43:9:9" line-data="	// get employee by id rest api">`id`</SwmToken>`)`: Retrieves an employee by ID.
-    - <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="54:8:8" line-data="	public ResponseEntity&lt;Employee&gt; updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails){">`updateEmployee`</SwmToken>`(`<SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="45:13:13" line-data="	public ResponseEntity&lt;Employee&gt; getEmployeeById(@PathVariable Long id) {">`Long`</SwmToken>` `<SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="43:9:9" line-data="	// get employee by id rest api">`id`</SwmToken>`, `<SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="20:10:10" line-data="import net.javaguides.springboot.model.Employee;">`Employee`</SwmToken>` `<SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="54:23:23" line-data="	public ResponseEntity&lt;Employee&gt; updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails){">`employeeDetails`</SwmToken>`)`: Updates an employee's details.
-    - <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="68:13:13" line-data="	public ResponseEntity&lt;Map&lt;String, Boolean&gt;&gt; deleteEmployee(@PathVariable Long id){">`deleteEmployee`</SwmToken>`(`<SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="45:13:13" line-data="	public ResponseEntity&lt;Employee&gt; getEmployeeById(@PathVariable Long id) {">`Long`</SwmToken>` `<SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="43:9:9" line-data="	// get employee by id rest api">`id`</SwmToken>`)`: Deletes an employee.
+    - <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="33:8:10" line-data="	public List&lt;Employee&gt; getAllEmployees(){">`getAllEmployees()`</SwmToken>: Retrieves all employees.
+    - <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="39:5:5" line-data="	public Employee createEmployee(@RequestBody Employee employee) {">`createEmployee`</SwmToken>`(`\`Employee` `<SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="37:5:5" line-data="	// create employee rest api">`employee`</SwmToken>`)`: Creates a new employee.
+    - <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="45:8:8" line-data="	public ResponseEntity&lt;Employee&gt; getEmployeeById(@PathVariable Long id) {">`getEmployeeById`</SwmToken>`(`<SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="45:13:13" line-data="	public ResponseEntity&lt;Employee&gt; getEmployeeById(@PathVariable Long id) {">`Long`</SwmToken>` `<SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="43:9:9" line-data="	// get employee by id rest api">`id`</SwmToken>`)`: Retrieves an employee by ID.
+    - <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="54:8:8" line-data="	public ResponseEntity&lt;Employee&gt; updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails){">`updateEmployee`</SwmToken>`(`<SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="45:13:13" line-data="	public ResponseEntity&lt;Employee&gt; getEmployeeById(@PathVariable Long id) {">`Long`</SwmToken>` `<SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="43:9:9" line-data="	// get employee by id rest api">`id`</SwmToken>`, `\`Employee` `<SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="54:23:23" line-data="	public ResponseEntity&lt;Employee&gt; updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails){">`employeeDetails`</SwmToken>`)`: Updates an employee's details.
+    - <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="68:13:13" line-data="	public ResponseEntity&lt;Map&lt;String, Boolean&gt;&gt; deleteEmployee(@PathVariable Long id){">`deleteEmployee`</SwmToken>`(`<SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="45:13:13" line-data="	public ResponseEntity&lt;Employee&gt; getEmployeeById(@PathVariable Long id) {">`Long`</SwmToken>` `<SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="43:9:9" line-data="	// get employee by id rest api">`id`</SwmToken>`)`: Deletes an employee.
 
-This structure ensures that all CRUD operations are efficiently managed within the <SwmToken path="/springboot-backend/src/main/java/net/javaguides/springboot/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken>.
+This structure ensures that all CRUD operations are efficiently managed within the <SwmToken path="/springboot-backend/src/main/java/com/bosch/ec/controller/EmployeeController.java" pos="26:4:4" line-data="public class EmployeeController {">`EmployeeController`</SwmToken>.
 
 <SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBZWFzeUNvbmZpZyUzQSUzQUFzYXJ1ZGhlZW5L" repo-name="easyConfig"><sup>Powered by [Swimm](https://app.swimm.io/)</sup></SwmMeta>
