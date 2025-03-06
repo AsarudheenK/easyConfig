@@ -1,4 +1,4 @@
-package com.bosch.ec.javaguides;
+package com.bosch.ec;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.any;
