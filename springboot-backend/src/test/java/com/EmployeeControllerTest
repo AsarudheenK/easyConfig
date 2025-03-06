@@ -1,0 +1,122 @@
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
+import com.bosch.ec.repository.EmployeeRepository;
+import com.bosch.ec.exception.ResourceNotFoundException;
+import com.bosch.ec.model.Employee;
+
+package com.bosch.ec.controller;
+
+
+
+
+
+@ExtendWith(MockitoExtension.class)
+public class EmployeeControllerTest {
+
+	@Mock
+	private EmployeeRepository employeeRepository;
+
+	@InjectMocks
+	private EmployeeController employeeController;
+
+	private Employee employee;
+
+	@BeforeEach
+	public void setUp() {
+		employee = new Employee();
+		employee.setId(1L);
+		employee.setFirstName("John");
+		employee.setLastName("Doe");
+		employee.setEmailId("john.doe@example.com");
+	}
+
+	@Test
+	public void testGetAllEmployees() {
+		List<Employee> employees = new ArrayList<>();
+		employees.add(employee);
+
+		when(employeeRepository.findAll()).thenReturn(employees);
+
+		List<Employee> result = employeeController.getAllEmployees();
+		assertEquals(1, result.size());
+		assertEquals("John", result.get(0).getFirstName());
+	}
+
+	@Test
+	public void testCreateEmployee() {
+		when(employeeRepository.save(any(Employee.class))).thenReturn(employee);
+
+		Employee result = employeeController.createEmployee(employee);
+		assertNotNull(result);
+		assertEquals("John", result.getFirstName());
+	}
+
+	@Test
+	public void testGetEmployeeById() {
+		when(employeeRepository.findById(anyLong())).thenReturn(Optional.of(employee));
+
+		ResponseEntity<Employee> result = employeeController.getEmployeeById(1L);
+		assertNotNull(result.getBody());
+		assertEquals("John", result.getBody().getFirstName());
+	}
+
+	@Test
+	public void testUpdateEmployee() {
+		Employee updatedEmployee = new Employee();
+		updatedEmployee.setFirstName("Jane");
+		updatedEmployee.setLastName("Doe");
+		updatedEmployee.setEmailId("jane.doe@example.com");
+
+		when(employeeRepository.findById(anyLong())).thenReturn(Optional.of(employee));
+		when(employeeRepository.save(any(Employee.class))).thenReturn(updatedEmployee);
+
+		ResponseEntity<Employee> result = employeeController.updateEmployee(1L, updatedEmployee);
+		assertNotNull(result.getBody());
+		assertEquals("Jane", result.getBody().getFirstName());
+	}
+
+	@Test
+	public void testDeleteEmployee() {
+		when(employeeRepository.findById(anyLong())).thenReturn(Optional.of(employee));
+		doNothing().when(employeeRepository).delete(any(Employee.class));
+
+		ResponseEntity<Map<String, Boolean>> result = employeeController.deleteEmployee(1L);
+		assertNotNull(result.getBody());
+		assertEquals(Boolean.TRUE, result.getBody().get("deleted"));
+
+		verify(employeeRepository, times(1)).delete(employee);
+	}
+}import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import java.util.Arrays;
+import java.util.Optional;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory
+
+package com.bosch.ec.controller;
+
+
